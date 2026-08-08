@@ -180,6 +180,7 @@ These values are defined in `SCARA_ROBOT_ARM_CODE.ino` and must match your physi
 
 | Constant | Value | Description |
 |---|---|---|
+| Z-axis vertical dimension | 485 mm | Overall physical vertical Z-axis dimension; usable calibrated travel is set separately |
 | Fixed structural offset | 238.00 mm | Fixed section before the planar rotating chain; not used as an FK/IK link |
 | `L1` | 136.50 mm | Shoulder-to-elbow rotating link used by FK/IK |
 | `toolTcpLengthMm` | 118.03 mm | Elbow pivot to gripper TCP; second planar FK/IK link (editable via web) |

@@ -10,7 +10,7 @@ A custom **3-axis (3-DOF) SCARA robotic arm with a servo gripper** developed as 
 | Item | Specification |
 |---|---|
 | Robot type | 3-axis (3-DOF) SCARA robotic arm with servo gripper |
-| Vertical Z stroke | 290 mm |
+| Z-axis vertical dimension | 485 mm |
 | Fixed structural offset | 238.00 mm |
 | Shoulder-to-elbow kinematic link | 136.50 mm |
 | Elbow-to-gripper TCP | 118.03 mm |

@@ -10,7 +10,7 @@ The SCARA configuration was selected for mechanical efficiency. The main arm mot
 
 ### Core dimensions
 
-- Vertical Z stroke: **290 mm**
+- Z-axis vertical dimension: **485 mm**
 - Fixed structural offset: **238.00 mm**
 - Shoulder-to-elbow rotating link: **136.50 mm**
 - Elbow-to-gripper TCP distance: **118.03 mm**
