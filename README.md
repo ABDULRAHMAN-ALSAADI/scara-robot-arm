@@ -32,6 +32,22 @@ The complete downloadable/printable 3D model package is available on Cults3D:
 
 The manufacturing files are distributed there rather than duplicated in this repository. This GitHub repository is the engineering portfolio and software/documentation source for the robot.
 
+## CAD and physical prototype
+
+### Internal mechanical layout
+
+<p align="center">
+  <img src="media/cad/scara-transparent-assembly.jpg" alt="Transparent SCARA CAD assembly showing internal mechanisms" width="850">
+</p>
+
+The transparent assembly exposes the internal motors, GT2 belt drives, pulley reductions, lead screw, guide shafts, bearings, and rotary-joint structure.
+
+### Physical robot
+
+<p align="center">
+  <img src="media/prototype/scara-arm-prototype.gif" alt="SCARA Robot Arm physical prototype demonstration" width="700">
+</p>
+
 ## Mechanical design
 
 The arm was designed in SolidWorks and manufactured primarily with 3D-printed components. The mechanical architecture uses:
@@ -135,6 +151,7 @@ scara-robot-arm/
 │   └── stl/                     # manufacturing-file distribution notes
 ├── media/
 │   ├── cad/
+│   ├── prototype/
 │   └── web-interface/
 ├── LICENSE.md
 └── .gitignore
