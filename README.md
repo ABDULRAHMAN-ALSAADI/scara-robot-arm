@@ -1,8 +1,8 @@
 # SCARA Robot Arm
 
 <p align="center">
-  <img src="media/cad/scara-assembled-perspective.jpg" alt="SCARA Robot Arm CAD assembly" width="850">
-</p>
+  <img width="6600" height="5100" alt="B2 Z-AXIS ARM BASE ASSEMBLY 1" src="https://github.com/user-attachments/assets/e0f021a8-865e-4b30-974b-216a7af687e7" />
+
 
 A custom **4-axis SCARA robotic arm** developed as a mechatronics graduation project. The project covers the complete robot subsystem: mechanical design, 3D-printed structure, GT2 belt transmissions, ESP32 embedded control, stepper-motor actuation, homing and calibration, forward/inverse kinematics, collision-aware motion, recipe automation, a servo gripper, and a browser-based control interface.
 
