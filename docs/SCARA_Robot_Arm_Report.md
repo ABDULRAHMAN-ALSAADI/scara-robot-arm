@@ -4,9 +4,9 @@
 
 ## 1. Project Objective & Specifications
 
-This project covers the design, construction, and control of a custom-built 4-axis SCARA (Selective Compliance Assembly Robot Arm). The project explores robotic kinematics, mechanical transmission, and microcontroller-based automation using accessible 3D-printed components.
+This project covers the design, construction, and control of a custom-built **3-axis (3-DOF) SCARA robotic arm with a servo gripper**. The project explores robotic kinematics, mechanical transmission, and microcontroller-based automation using accessible 3D-printed components.
 
-The SCARA configuration was selected for mechanical efficiency. The main arm motion is constrained to the horizontal plane while the structural load is carried by bearings and a rigid Z-axis pillar. NEMA 17 stepper motors and GT2 belt reductions provide the joint motion.
+The SCARA configuration was selected for mechanical efficiency. The main arm motion is constrained to the horizontal plane while the structural load is carried by bearings and a rigid Z-axis pillar. Three NEMA 17 stepper motors provide the three controlled robot axes, while an MG90S servo actuates the gripper as the end effector.
 
 ### Core dimensions
 
@@ -71,7 +71,7 @@ The **ESP32** is the main controller. Its processing capability supports the tri
 
 ### 3.3 Motor control
 
-The ESP32 sends STEP and DIR signals to **DRV8825** stepper motor drivers, which control the NEMA 17 motors. The MG90S gripper servo is controlled with PWM.
+The ESP32 sends STEP and DIR signals to **DRV8825** stepper motor drivers, which control the three NEMA 17 motors. The MG90S gripper servo is controlled with PWM and is treated as the end-effector actuator rather than an additional robot axis.
 
 ### 3.4 Homing and calibration
 
@@ -130,7 +130,7 @@ The software architecture supports HTTP API communication, dashboard integration
 
 ## 5. Project Outcome
 
-The completed arm demonstrates the integration of mechanical design, 3D printing, belt transmission design, electronics, embedded programming, motion control, kinematics, calibration, and web-based robot operation in one SCARA subsystem.
+The completed arm demonstrates the integration of mechanical design, 3D printing, belt transmission design, electronics, embedded programming, motion control, kinematics, calibration, and web-based robot operation in one **3-axis SCARA subsystem with a servo gripper**.
 
 ## Complete 3D Model
 
