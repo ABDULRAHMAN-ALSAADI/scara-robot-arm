@@ -1,0 +1,29 @@
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Build outputs
+build/
+*.bin
+*.elf
+*.map
+
+# Temporary/export files
+*.tmp
+*.bak
+~$*
+
+# Private configuration and calibration
+*.secrets.*
+secrets.*
+credentials.*
+calibration_backup*.json
+collision_backup*.json
+
+# SolidWorks temporary/backup files
+~$*.SLDPRT
+~$*.SLDASM
+*.sldasm~
+*.sldprt~
