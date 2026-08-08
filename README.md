@@ -36,17 +36,15 @@ The manufacturing files are distributed there rather than duplicated in this rep
 
 ### Internal mechanical layout
 
-<p align="center">
-  <img src="media/cad/scara-transparent-assembly.jpg" alt="Transparent SCARA CAD assembly showing internal mechanisms" width="850">
-</p>
+<img width="6600" height="5100" alt="B2 Z-AXIS ARM BASE ASSEMBLY 2" src="https://github.com/user-attachments/assets/36fddd18-dcf5-4c9e-8df1-2cbe0dd4dd81" />
+
 
 The transparent assembly exposes the internal motors, GT2 belt drives, pulley reductions, lead screw, guide shafts, bearings, and rotary-joint structure.
 
 ### Physical robot
 
-<p align="center">
-  <img src="media/prototype/scara-arm-prototype.gif" alt="SCARA Robot Arm physical prototype demonstration" width="700">
-</p>
+<img width="426" height="240" alt="SCARA ARM" src="https://github.com/user-attachments/assets/eef20ee2-d971-4017-ab87-3beea011a5dd" />
+
 
 ## Mechanical design
 
