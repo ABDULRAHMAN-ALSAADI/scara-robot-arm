@@ -1,0 +1,47 @@
+name: Update Z dimension
+
+on:
+  push:
+    paths:
+      - '.github/workflows/update-z-dimension.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update-z-dimension:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Correct Z-axis dimension in documentation
+        shell: python
+        run: |
+          from pathlib import Path
+
+          replacements = {
+              '| Vertical Z stroke | 290 mm |': '| Z-axis vertical dimension | 485 mm |',
+              '- Vertical Z stroke: **290 mm**': '- Z-axis vertical dimension: **485 mm**',
+          }
+
+          for p in Path('.').rglob('*.md'):
+              s = p.read_text()
+              old = s
+              for a, b in replacements.items():
+                  s = s.replace(a, b)
+              if p.as_posix() == 'docs/software/HARDWARE_CONFIGURATION.md' and '| Z-axis vertical dimension | 485 mm |' not in s:
+                  marker = '| Fixed structural offset | 238.00 mm | Fixed section before the planar rotating chain; not used as an FK/IK link |'
+                  if marker in s:
+                      s = s.replace(marker, '| Z-axis vertical dimension | 485 mm | Overall physical vertical Z-axis dimension; usable calibrated travel is set separately |\n' + marker)
+              if s != old:
+                  p.write_text(s)
+
+      - name: Commit correction
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md docs
+          if ! git diff --cached --quiet; then
+            git commit -m "Correct Z-axis vertical dimension to 485 mm"
+            git push
+          fi
