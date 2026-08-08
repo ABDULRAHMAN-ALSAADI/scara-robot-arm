@@ -34,22 +34,22 @@ The two arm segments are defined as:
 
 | Parameter | Symbol | Value | Description |
 |---|---|---|---|
-| Upper arm length | `L1` | **136.5 mm** | Shoulder pivot to elbow pivot |
-| Tool Center Point | `toolTcpLengthMm` | **120.0 mm** *(editable)* | Elbow pivot to grasp center |
+| Shoulder-to-elbow link | `L1` | **136.50 mm** | Shoulder pivot to elbow pivot |
+| Tool Center Point | `toolTcpLengthMm` | **118.03 mm** *(editable)* | Elbow pivot to grasp center |
 
-`toolTcpLengthMm` can be updated at runtime via the web interface and is saved to NVS. It is effectively **L2** in the kinematic equations.
+`toolTcpLengthMm` can be updated at runtime via the web interface and is saved to NVS. It is effectively the second rotating link in the planar kinematic equations. The robot also has a **238.00 mm fixed structural offset**, but that fixed section is not part of the two-link FK/IK calculation.
 
 <img width="5100" height="2022" alt="B2 Z-AXIS ARM BASE ASSEMBLY98" src="https://github.com/user-attachments/assets/977fb36b-cf99-4fac-908b-73b847c02684" />
 
 
 **Maximum reach** (arm fully extended):
 ```
-maxReach = L1 + toolTcpLengthMm = 136.5 + 120.0 = 256.5 mm
+maxReach = L1 + toolTcpLengthMm = 136.50 + 118.03 = 254.53 mm
 ```
 
 **Minimum reach** (arm fully folded, singular point):
 ```
-minReach = |L1 - toolTcpLengthMm| = |136.5 - 120.0| = 16.5 mm
+minReach = |L1 - toolTcpLengthMm| = |136.50 - 118.03| = 18.47 mm
 ```
 
 Any XY target with a radial distance outside `[minReach, maxReach]` is rejected by the IK solver.
@@ -60,7 +60,7 @@ Any XY target with a radial distance outside `[minReach, maxReach]` is rejected 
 
 ### XY Plane
 
-The origin is the shoulder pivot (A1 rotation axis). Positive X points forward from the base when A1 = 0°. The XY plane is the robot's working plane at any given Z height.
+The planar FK/IK origin is the shoulder pivot (A1 rotation axis). The 238.00 mm fixed structural offset is handled by the mechanical/base frame definition and does not change the two-link radial reach calculation. Positive X points forward from the base when A1 = 0°. The XY plane is the robot's working plane at any given Z height.
 
 ```
          +Y

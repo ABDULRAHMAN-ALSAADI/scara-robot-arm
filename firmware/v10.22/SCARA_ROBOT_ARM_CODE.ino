@@ -108,8 +108,8 @@ constexpr float L1 = 136.5f;
 
 // Tool Center Point (TCP): distance from the A2 rotation axis to the point
 // where the object is actually gripped. The new gripper drawing indicates
-// approximately 120.0 mm to the grasp center. This is editable in Setup.
-float toolTcpLengthMm = 120.0f;
+// 118.03 mm to the measured grasp center. This is editable in Setup.
+float toolTcpLengthMm = 118.03f;
 
 // Servo gripper command and calibration.
 // The displayed gripper angle is commanded position; there is no feedback sensor.

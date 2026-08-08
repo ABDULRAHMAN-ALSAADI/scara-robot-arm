@@ -11,10 +11,11 @@ The SCARA configuration was selected for mechanical efficiency. The main arm mot
 ### Core dimensions
 
 - Vertical Z stroke: **290 mm**
-- Fixed base offset: **L1 = 205 mm**
-- Rotational link: **L2 = 222 mm**
-- Rotational link: **L3 = 156.8 mm**
-- Approximate maximum reach: **584 mm**
+- Fixed structural offset: **238.00 mm**
+- Shoulder-to-elbow rotating link: **136.50 mm**
+- Elbow-to-gripper TCP distance: **118.03 mm**
+- Maximum planar kinematic radius from the shoulder pivot: **254.53 mm**
+- Overall straight centerline length including the fixed offset: **492.53 mm**
 
 ## 2. Mechanical Design
 
@@ -31,7 +32,7 @@ For an estimated moving mass of about 2.5 kg, the vertical system must support a
 
 ### 2.2 Link 1 to Link 2: compound belt transmission
 
-Power from Motor 2 is transferred across the fixed 205 mm L1 section using a two-stage GT2 belt reduction rather than a long train of printed gears.
+Power from Motor 2 is transferred through the fixed 238.00 mm structural section using a two-stage GT2 belt reduction rather than a long train of printed gears.
 
 The transmission includes:
 
@@ -44,7 +45,7 @@ The reduction increases available torque and angular resolution while reducing b
 
 ### 2.3 Link 2 to Link 3
 
-Motor 3 is mounted close to Joint 2 instead of at the arm tip to reduce swing weight and rotational inertia. A 400 mm GT2 belt transfers motion to a 90-tooth pulley at Joint 3, which is connected to a custom 3D-printed coupler supporting Link 3 and the gripper assembly.
+Motor 3 is mounted close to Joint 2 instead of at the arm tip to reduce swing weight and rotational inertia. A 400 mm GT2 belt transfers motion to a 90-tooth pulley at Joint 3. The planar kinematic chain uses a 136.50 mm shoulder-to-elbow link and a measured 118.03 mm elbow-to-gripper Tool Center Point (TCP) distance. The preceding 238.00 mm section is a fixed structural offset and is not included as a rotating FK/IK link.
 
 ### 2.4 Joint bearings
 

@@ -98,7 +98,7 @@ void saveMotionProfiles() {
 
 void loadToolSettings() {
   toolStore.begin("scara_tool", false);
-  toolTcpLengthMm = toolStore.getFloat("l2tcp", 120.0f);
+  toolTcpLengthMm = toolStore.getFloat("l2tcp", 118.03f);
   toolTcpLengthMm = constrain(toolTcpLengthMm, 20.0f, 250.0f);
 }
 

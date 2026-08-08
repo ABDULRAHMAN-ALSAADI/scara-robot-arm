@@ -180,8 +180,9 @@ These values are defined in `SCARA_ROBOT_ARM_CODE.ino` and must match your physi
 
 | Constant | Value | Description |
 |---|---|---|
-| `L1` | 136.5 mm | Length of Arm 1 (shoulder to elbow pivot) |
-| `toolTcpLengthMm` | 120.0 mm | Tool Center Point: elbow pivot to grasp center (editable via web) |
+| Fixed structural offset | 238.00 mm | Fixed section before the planar rotating chain; not used as an FK/IK link |
+| `L1` | 136.50 mm | Shoulder-to-elbow rotating link used by FK/IK |
+| `toolTcpLengthMm` | 118.03 mm | Elbow pivot to gripper TCP; second planar FK/IK link (editable via web) |
 | `A1_STEPS_PER_DEG` | 142.22 steps/° | A1 shoulder resolution |
 | `A2_STEPS_PER_DEG` | 40.0 steps/° | A2 elbow resolution |
 | `Z_STEPS_PER_MM` | 400.0 steps/mm | Z-axis linear resolution |
@@ -236,17 +237,17 @@ The firmware runs in **AP+STA** (dual) WiFi mode. Update the credentials in `SCA
 ```cpp
 // Backup access point (always available)
 const char* AP_SSID = "SCARA-Robot";
-const char* AP_PASS = "robot1234";
+const char* AP_PASS = "CHANGE_ME";
 
 // Main robot-cell network (join this after boot)
-const char* STA_SSID = "ALSAADI";
-const char* STA_PASS = "Alsaadi123";
+const char* STA_SSID = "YOUR_WIFI_SSID";
+const char* STA_PASS = "YOUR_WIFI_PASSWORD";
 ```
 
 | Network | SSID | Default IP | Use |
 |---|---|---|---|
 | Backup AP | `SCARA-Robot` | `192.168.4.1` | Always available for setup/recovery |
-| Station (STA) | `ALSAADI` | Assigned by router DHCP | Main operating network |
+| Station (STA) | your configured SSID | Assigned by router DHCP | Main operating network |
 
 - STA connection timeout: **15 seconds**. If it fails, the backup AP remains active.
 - The STA IP is printed to the Serial Monitor at boot — use this IP in any MQTT coordinator GUI.
