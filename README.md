@@ -4,13 +4,13 @@
   <img width="6600" height="5100" alt="B2 Z-AXIS ARM BASE ASSEMBLY 1" src="https://github.com/user-attachments/assets/e0f021a8-865e-4b30-974b-216a7af687e7" />
 
 
-A custom **4-axis SCARA robotic arm** developed as a mechatronics graduation project. The project covers the complete robot subsystem: mechanical design, 3D-printed structure, GT2 belt transmissions, ESP32 embedded control, stepper-motor actuation, homing and calibration, forward/inverse kinematics, collision-aware motion, recipe automation, a servo gripper, and a browser-based control interface.
+A custom **3-axis (3-DOF) SCARA robotic arm with a servo gripper** developed as a mechatronics graduation project. The project covers the complete robot subsystem: mechanical design, 3D-printed structure, GT2 belt transmissions, ESP32 embedded control, stepper-motor actuation, homing and calibration, forward/inverse kinematics, collision-aware motion, recipe automation, a servo gripper, and a browser-based control interface.
 
 ## Project at a glance
 
 | Item | Specification |
 |---|---|
-| Robot type | 4-axis SCARA robotic arm |
+| Robot type | 3-axis (3-DOF) SCARA robotic arm with servo gripper |
 | Vertical Z stroke | 290 mm |
 | Fixed base offset | L1 = 205 mm |
 | Rotational links | L2 = 222 mm, L3 = 156.8 mm |
