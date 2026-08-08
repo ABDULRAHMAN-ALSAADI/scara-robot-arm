@@ -1,0 +1,81 @@
+name: Update SCARA geometry
+
+on:
+  push:
+    paths:
+      - '.github/workflows/update-scara-geometry.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update-geometry:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Correct geometry references
+        shell: python
+        run: |
+          from pathlib import Path
+
+          # Engineering report
+          p = Path('docs/SCARA_Robot_Arm_Report.md')
+          s = p.read_text()
+          s = s.replace('- Fixed base offset: **L1 = 205 mm**\n- Rotational link: **L2 = 222 mm**\n- Rotational link: **L3 = 156.8 mm**\n- Approximate maximum reach: **584 mm**',
+                        '- Fixed structural offset: **238.00 mm**\n- Shoulder-to-elbow rotating link: **136.50 mm**\n- Elbow-to-gripper TCP distance: **118.03 mm**\n- Maximum planar kinematic radius from the shoulder pivot: **254.53 mm**\n- Overall straight centerline length including the fixed offset: **492.53 mm**')
+          s = s.replace('Power from Motor 2 is transferred across the fixed 205 mm L1 section',
+                        'Power from Motor 2 is transferred through the fixed 238.00 mm structural section')
+          s = s.replace('Motor 3 is mounted close to Joint 2 instead of at the arm tip to reduce swing weight and rotational inertia. A 400 mm GT2 belt transfers motion to a 90-tooth pulley at Joint 3, which is connected to a custom 3D-printed coupler supporting Link 3 and the gripper assembly.',
+                        'Motor 3 is mounted close to Joint 2 instead of at the arm tip to reduce swing weight and rotational inertia. A 400 mm GT2 belt transfers motion to a 90-tooth pulley at Joint 3. The planar kinematic chain uses a 136.50 mm shoulder-to-elbow link and a measured 118.03 mm elbow-to-gripper Tool Center Point (TCP) distance. The preceding 238.00 mm section is a fixed structural offset and is not included as a rotating FK/IK link.')
+          p.write_text(s)
+
+          # Kinematics guide
+          p = Path('docs/software/KINEMATICS.md')
+          s = p.read_text()
+          s = s.replace('| Upper arm length | `L1` | **136.5 mm** | Shoulder pivot to elbow pivot |\n| Tool Center Point | `toolTcpLengthMm` | **120.0 mm** *(editable)* | Elbow pivot to grasp center |',
+                        '| Shoulder-to-elbow link | `L1` | **136.50 mm** | Shoulder pivot to elbow pivot |\n| Tool Center Point | `toolTcpLengthMm` | **118.03 mm** *(editable)* | Elbow pivot to grasp center |')
+          s = s.replace('`toolTcpLengthMm` can be updated at runtime via the web interface and is saved to NVS. It is effectively **L2** in the kinematic equations.',
+                        '`toolTcpLengthMm` can be updated at runtime via the web interface and is saved to NVS. It is effectively the second rotating link in the planar kinematic equations. The robot also has a **238.00 mm fixed structural offset**, but that fixed section is not part of the two-link FK/IK calculation.')
+          s = s.replace('maxReach = L1 + toolTcpLengthMm = 136.5 + 120.0 = 256.5 mm',
+                        'maxReach = L1 + toolTcpLengthMm = 136.50 + 118.03 = 254.53 mm')
+          s = s.replace('minReach = |L1 - toolTcpLengthMm| = |136.5 - 120.0| = 16.5 mm',
+                        'minReach = |L1 - toolTcpLengthMm| = |136.50 - 118.03| = 18.47 mm')
+          s = s.replace('The origin is the shoulder pivot (A1 rotation axis).',
+                        'The planar FK/IK origin is the shoulder pivot (A1 rotation axis). The 238.00 mm fixed structural offset is handled by the mechanical/base frame definition and does not change the two-link radial reach calculation.')
+          p.write_text(s)
+
+          # Hardware configuration + credential sanitization
+          p = Path('docs/software/HARDWARE_CONFIGURATION.md')
+          s = p.read_text()
+          s = s.replace('| `L1` | 136.5 mm | Length of Arm 1 (shoulder to elbow pivot) |\n| `toolTcpLengthMm` | 120.0 mm | Tool Center Point: elbow pivot to grasp center (editable via web) |',
+                        '| Fixed structural offset | 238.00 mm | Fixed section before the planar rotating chain; not used as an FK/IK link |\n| `L1` | 136.50 mm | Shoulder-to-elbow rotating link used by FK/IK |\n| `toolTcpLengthMm` | 118.03 mm | Elbow pivot to gripper TCP; second planar FK/IK link (editable via web) |')
+          s = s.replace('const char* AP_PASS = "robot1234";', 'const char* AP_PASS = "CHANGE_ME";')
+          s = s.replace('const char* STA_SSID = "ALSAADI";', 'const char* STA_SSID = "YOUR_WIFI_SSID";')
+          s = s.replace('const char* STA_PASS = "Alsaadi123";', 'const char* STA_PASS = "YOUR_WIFI_PASSWORD";')
+          s = s.replace('| Station (STA) | `ALSAADI` | Assigned by router DHCP | Main operating network |',
+                        '| Station (STA) | your configured SSID | Assigned by router DHCP | Main operating network |')
+          p.write_text(s)
+
+          # Firmware actual kinematic TCP
+          p = Path('firmware/v10.22/SCARA_ROBOT_ARM_CODE.ino')
+          s = p.read_text()
+          s = s.replace('approximately 120.0 mm to the grasp center. This is editable in Setup.\nfloat toolTcpLengthMm = 120.0f;',
+                        '118.03 mm to the measured grasp center. This is editable in Setup.\nfloat toolTcpLengthMm = 118.03f;')
+          s = s.replace('toolStore.getFloat("l2tcp", 120.0f)', 'toolStore.getFloat("l2tcp", 118.03f)')
+          p.write_text(s)
+
+          # Calibration/storage fallback default is in a separate tab
+          p = Path('firmware/v10.22/02_CalibrationAndStorage.ino')
+          s = p.read_text().replace('toolStore.getFloat("l2tcp", 120.0f)', 'toolStore.getFloat("l2tcp", 118.03f)')
+          p.write_text(s)
+
+      - name: Commit corrections
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md docs firmware
+          if ! git diff --cached --quiet; then
+            git commit -m "Correct SCARA geometry and kinematic dimensions"
+            git push
+          fi
