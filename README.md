@@ -3,7 +3,6 @@
 <p align="center">
   <img width="6600" height="5100" alt="B2 Z-AXIS ARM BASE ASSEMBLY 1" src="https://github.com/user-attachments/assets/e0f021a8-865e-4b30-974b-216a7af687e7" />
 
-
 A custom **3-axis (3-DOF) SCARA robotic arm with a servo gripper** developed as a mechatronics graduation project. The project covers the complete robot subsystem: mechanical design, 3D-printed structure, GT2 belt transmissions, ESP32 embedded control, stepper-motor actuation, homing and calibration, forward/inverse kinematics, collision-aware motion, recipe automation, a servo gripper, and a browser-based control interface.
 
 ## Project at a glance
@@ -12,9 +11,11 @@ A custom **3-axis (3-DOF) SCARA robotic arm with a servo gripper** developed as 
 |---|---|
 | Robot type | 3-axis (3-DOF) SCARA robotic arm with servo gripper |
 | Vertical Z stroke | 290 mm |
-| Fixed base offset | L1 = 205 mm |
-| Rotational links | L2 = 222 mm, L3 = 156.8 mm |
-| Maximum documented reach | ~584 mm |
+| Fixed structural offset | 238.00 mm |
+| Shoulder-to-elbow kinematic link | 136.50 mm |
+| Elbow-to-gripper TCP | 118.03 mm |
+| Planar kinematic maximum radius | 254.53 mm from the shoulder pivot |
+| Overall straight centerline length | 492.53 mm including the fixed offset |
 | Controller | ESP32 |
 | Main actuators | 3 × NEMA 17 stepper motors |
 | Stepper drivers | 3 × DRV8825 |
@@ -23,6 +24,8 @@ A custom **3-axis (3-DOF) SCARA robotic arm with a servo gripper** developed as 
 | Vertical guidance | Lead screw + 10 mm shafts + LM10UU bearings |
 | Position reference | Limit-switch homing |
 | Current firmware | v10.22 |
+
+> **Geometry note:** the 238.00 mm section is a fixed structural offset and is not one of the two rotating links used by the planar FK/IK equations. The planar kinematics use 136.50 mm and 118.03 mm.
 
 ## Full 3D design
 
@@ -38,13 +41,11 @@ The manufacturing files are distributed there rather than duplicated in this rep
 
 <img width="6600" height="5100" alt="B2 Z-AXIS ARM BASE ASSEMBLY 2" src="https://github.com/user-attachments/assets/36fddd18-dcf5-4c9e-8df1-2cbe0dd4dd81" />
 
-
 The transparent assembly exposes the internal motors, GT2 belt drives, pulley reductions, lead screw, guide shafts, bearings, and rotary-joint structure.
 
 ### Physical robot
 
 <img width="426" height="240" alt="SCARA ARM" src="https://github.com/user-attachments/assets/eef20ee2-d971-4017-ab87-3beea011a5dd" />
-
 
 ## Mechanical design
 
@@ -53,7 +54,9 @@ The arm was designed in SolidWorks and manufactured primarily with 3D-printed co
 - a lead-screw Z axis for vertical motion;
 - two 10 mm steel shafts with LM10UU bearings to resist cantilever bending;
 - GT2 belt transmissions for the rotary joints;
-- compound pulley reduction at the L1 → L2 transmission;
+- a fixed 238.00 mm structural offset before the planar shoulder/elbow kinematic chain;
+- a 136.50 mm shoulder-to-elbow rotating link;
+- a 118.03 mm elbow-to-gripper TCP distance;
 - a remotely positioned third stepper motor to reduce moving inertia at the end of the arm;
 - thrust bearings for axial joint load and radial bearings for shaft alignment.
 
